@@ -7,7 +7,8 @@ type Projects struct {
 	Amount  float32 `json:"amount"`
 	Tracked float32 `json:"tracked"`
 	//CreatedAt time.Time
-	UserID *int `json:"user_id"`
+	UserID      *int `json:"user_id"`
+	TimeEntryID uint `gorm:"not null" json:"time_entry_ID"`
 }
 
 type ProjectRepository interface {

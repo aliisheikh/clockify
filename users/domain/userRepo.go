@@ -8,9 +8,9 @@ import (
 
 type User struct {
 	ID        int                 `json:"id"`
-	Username  string              `json:"username"`
+	Username  string              `json:"username" binding:"required"`
 	Email     string              `json:"email"`
-	Password  string              `json:"password"`
+	Password  string              `json:"password" binding:"required"`
 	projects  []domain.Projects   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	timeEntry []domain2.TimeEntry `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	// Add other fields as needed

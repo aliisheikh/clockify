@@ -9,23 +9,10 @@ import (
 	"strings"
 )
 
-//
-//type RegisterRequest struct {
-//	Username string `json:"username" binding:"required"`
-//	Email    string `json:"email" binding:"required,email"`
-//	Password string `json:"password" binding:"required"`
-//}
-
 type RegisterResponse struct {
 	Message string `json:"message"`
 	UserID  uint   `json:"userID"`
 }
-
-//
-//type LoginRequest struct {
-//	Username string `json:"username" binding:"required"`
-//	Password string `json:"password" binding:"required"`
-//}
 
 type LoginResponse struct {
 	Message string `json:"message"`
@@ -44,6 +31,18 @@ func NewUserController(userService domain.UserService) *UserController {
 
 // UserController.Create
 
+// Swagger Data
+// @Summary Create a new user
+// @Description Register a new user
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param user body domain.User true "User"
+// @Success 201 {object} RegisterResponse
+// @Failure 400 {object} gin.H{"error": string}
+// @Failure 409 {object} gin.H{"error": string}
+// @Failure 500 {object} gin.H{"error": string}
+// @Router /users [post]
 func (userController *UserController) Create(ctx *gin.Context) {
 	// Initialize a User instance
 	var createUserRequest domain.User

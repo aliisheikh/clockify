@@ -35,7 +35,6 @@ func (timeEntryController *TimeEntryController) Create(ctx *gin.Context) {
 	}
 
 	var createTimeEntryRequest domain2.TimeEntry
-
 	if err := ctx.ShouldBindJSON(&createTimeEntryRequest); err != nil {
 		var errorMsg string
 		if verr, ok := err.(validator.ValidationErrors); ok {
@@ -53,7 +52,6 @@ func (timeEntryController *TimeEntryController) Create(ctx *gin.Context) {
 	}
 
 	createTimeEntryRequest.UserID = userID
-
 	fmt.Println(createTimeEntryRequest)
 
 	timeID, err := timeEntryController.timeEntryService.Create(createTimeEntryRequest)
@@ -64,7 +62,6 @@ func (timeEntryController *TimeEntryController) Create(ctx *gin.Context) {
 
 		default:
 			ctx.JSON(http.StatusBadRequest, gin.H{"error 2": err.Error()})
-
 		}
 		fmt.Println("Error:", err)
 		//ctx.JSON(http.StatusBadRequest, gin.H{"error": "failed to create Time Entry"})

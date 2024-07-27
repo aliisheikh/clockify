@@ -5,12 +5,12 @@ import (
 )
 
 type TimeEntry struct {
-	ID          int       `json:"id"`
-	ProjectID   int       `json:"projectID"`
-	UserID      int       `json:"userID"`
-	StartTime   time.Time `json:"startTime"`
-	EndTime     time.Time `json:"endTime"`
-	Description string    `json:"description"`
+	ID          int        `json:"id"`
+	ProjectID   *int       `json:"projectID"`
+	UserID      int        `json:"userID"`
+	StartTime   time.Time  `json:"startTime"`
+	EndTime     *time.Time `json:"endTime"`
+	Description string     `json:"description"`
 }
 
 type TimeEntryRepository interface {

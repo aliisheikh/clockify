@@ -1,7 +1,6 @@
 package timehttp
 
 import (
-	"clockify/timeEntry/presentation/adapter"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -35,7 +34,7 @@ func (timeEntryController *TimeEntryController) GetTimeEntryByID(ctx *gin.Contex
 	}
 
 	// Assuming there's an adapter to convert domain.TimeEntry to a response format
-	resp := adapter.DomainToTime(*timeEntry)
+	//resp := adapter.DomainToTime(*timeEntry)
 
-	ctx.JSON(http.StatusOK, gin.H{"data": resp})
+	ctx.JSON(http.StatusOK, gin.H{"data": timeEntry})
 }

@@ -35,9 +35,9 @@ func (t *TimeEntryServiceImpl) Create(timeEntry domain.TimeEntry) (*domain.TimeE
 	if timeEntry.UserID == 0 {
 		return &timeEntry, errors.New("UserID is required")
 	}
-	if timeEntry.ProjectID == 0 {
-		return &timeEntry, errors.New("ProjectID is required")
-	}
+	//if timeEntry.ProjectID == 0 {
+	//	return &timeEntry, errors.New("ProjectID is required")
+	//}
 
 	// Create TimeEntry object
 	newTimeEntry := &domain.TimeEntry{

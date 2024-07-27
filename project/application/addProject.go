@@ -35,13 +35,17 @@ func (p *ProjectServiceImpl) Create(project domain.Projects) (*domain.Projects, 
 	if project.Tracked == 0 {
 		return &project, errors.New("project Tracked is required")
 	}
+	if project.TimeEntryID == 0 {
+		return &project, errors.New("project TimeEntryID is required")
+	}
 
 	projects := &domain.Projects{
-		Name:    project.Name,
-		Amount:  project.Amount,
-		Client:  project.Client,
-		UserID:  project.UserID,
-		Tracked: project.Tracked,
+		Name:        project.Name,
+		Amount:      project.Amount,
+		Client:      project.Client,
+		UserID:      project.UserID,
+		Tracked:     project.Tracked,
+		TimeEntryID: project.TimeEntryID,
 	}
 	userID := project.UserID
 	projectID, err := p.projectRepository.SaveCreate(projects, *userID)

@@ -9,6 +9,16 @@ import (
 	"strconv"
 )
 
+// Add Swagger
+// @Summary Delete a user
+// @Description Delete a user by ID along with associated projects and time-entries
+// @Tags users
+// @Param userID path int true "User ID"
+// @Success 200 {object} gin.H{"message": string}
+// @Failure 400 {object} gin.H{"error": string}
+// @Failure 404 {object} gin.H{"error": string}
+// @Failure 500 {object} gin.H{"error": string}
+// @Router /users/{userID} [delete]
 func (userController *UserController) Delete(c *gin.Context) {
 	userId := c.Param("userID")
 	if userId <= "" {

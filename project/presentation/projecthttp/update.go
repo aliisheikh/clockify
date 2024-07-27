@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func (projectController *ProjectController) Update(c *gin.Context) {
+func (projectcontroller *ProjectController) Update(c *gin.Context) {
 	projectIDStr := c.Param("projectID")
 	userIDStr := c.Param("userID")
 
@@ -43,7 +43,7 @@ func (projectController *ProjectController) Update(c *gin.Context) {
 	updateProjectRequest.UserID = &userID
 
 	// Call the service method to update the time entry
-	if err := projectController.projectService.Update(updateProjectRequest); err != nil {
+	if err := projectcontroller.projectService.Update(updateProjectRequest); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update project"})
 		return
 	}

@@ -1,0 +1,9 @@
+basePath: /api
+host: localhost:1212
+info:
+  contact: {}
+  description: clockify project for time-entry
+  title: clockify project
+  version: "1.0"
+paths: {}
+swagger: "2.0"

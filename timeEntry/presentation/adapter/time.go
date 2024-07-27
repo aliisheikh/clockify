@@ -8,10 +8,10 @@ import (
 func DomainToTime(time domain.TimeEntry) models.TimeEntry {
 	return models.TimeEntry{
 		ID:          time.ID,
-		ProjectID:   time.ProjectID,
+		ProjectID:   *time.ProjectID,
 		UserID:      time.UserID,
 		StartTime:   time.StartTime,
-		EndTime:     time.EndTime,
+		EndTime:     *time.EndTime,
 		Description: time.Description,
 	}
 }

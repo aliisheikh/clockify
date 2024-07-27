@@ -1,14 +1,18 @@
 package application
 
 import (
+	"time"
+
 	"clockify/users/domain"
 	"github.com/dgrijalva/jwt-go"
-	"time"
 )
 
-func (u *UserServiceImp) GenerateToken(username string) (string, error) {
+var jwtKey = []byte("yoursecretkey")
+
+func (u *UserServiceImp) GenerateToken(userID int, username string) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 	claims := &domain.Claims{
+		ID:       userID,
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
@@ -16,7 +20,7 @@ func (u *UserServiceImp) GenerateToken(username string) (string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(u.jwtKey)
+	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
 		return "", err
 	}

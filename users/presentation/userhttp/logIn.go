@@ -7,22 +7,34 @@ import (
 	"net/http"
 )
 
+// @Summary Login a user
+// @Description Authenticate a user and generate a token
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param user body domain.User true "User credentials"
+// @Success 200 {object} LoginResponse
+// @Failure 400 {object} gin.H{"error": string}
+// @Failure 401 {object} gin.H{"error": string}
+// @Failure 500 {object} gin.H{"error": string}
+// @Router /users/login [post]
 func (userController *UserController) Login(ctx *gin.Context) {
 	var req domain.User
 	if err := ctx.ShouldBindJSON(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid username or password"})
 		fmt.Println(err.Error())
 		return
 	}
 
-	match, err := userController.userService.CheckPassword(req.Username, req.Password)
+	user, err := userController.userService.CheckPassword(req.Username, req.Password)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid username or password"})
+		fmt.Println(err.Error())
 		return
 	}
 
-	if match {
-		token, err := userController.userService.GenerateToken(req.Username)
+	if user != nil {
+		token, err := userController.userService.GenerateToken(user.ID, user.Username)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
 			return

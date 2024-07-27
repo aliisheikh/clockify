@@ -38,7 +38,7 @@ func (timeEntryController *TimeEntryController) Update(c *gin.Context) {
 
 	// Validate StartTime and EndTime if provided
 	if !updateTimeEntryRequest.StartTime.IsZero() && !updateTimeEntryRequest.EndTime.IsZero() {
-		if updateTimeEntryRequest.StartTime.After(updateTimeEntryRequest.EndTime) {
+		if updateTimeEntryRequest.StartTime.After(*updateTimeEntryRequest.EndTime) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "StartTime must be before EndTime"})
 			return
 		}

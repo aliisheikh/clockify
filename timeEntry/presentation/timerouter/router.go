@@ -21,6 +21,7 @@ func TimeEntryRouter(timeEntryRouter timehttp.TimeEntryController) *gin.Engine {
 
 	{
 		timeEntry.POST("", timeEntryRouter.Create)
+		timeEntry.POST("/start", timeEntryRouter.StartTimeEntry)
 		timeEntry.DELETE(":timeEntryID", timeEntryRouter.Delete)
 		timeEntry.PUT(":timeEntryID", timeEntryRouter.Update)
 		timeEntry.GET("", timeEntryRouter.GetByUserID)

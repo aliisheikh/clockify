@@ -23,16 +23,21 @@ import (
 	"log"
 )
 
+// @title clockify project
+// @version 1.0
+// @description clockify project for time-entry
+
+// @host localhost:1212
+// @basePath /api
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
-
 	// Connect to the database
 	db := config.Connect()
 	fmt.Println(db)
-
 	// Migrate User table
 	err = migrateUserTable(db)
 	if err != nil {
@@ -80,6 +85,9 @@ func main() {
 
 	// Setup routes for user, project, and TimeEntry
 	userRoutes := router.NewRouter(*userController)
+	fmt.Println(userRoutes)
+	authRouter := router.NewRouter(*userController)
+	fmt.Println(authRouter)
 	projectRoutes := projectrouter.ProjectRouter(*projectController)
 	timeRoutes := timerouter.TimeEntryRouter(*timeController)
 
@@ -90,17 +98,15 @@ func main() {
 		}
 	}()
 
-	// Run Project HTTP server in a Goroutine
 	go func() {
 		if err := projectRoutes.Run(":1213"); err != nil {
-			log.Fatalf("Failed to run Project server: %v", err)
+			log.Fatalf("Failed to start Project server: %v", err)
 		}
 	}()
 
-	// Run TimeEntry HTTP server in a Goroutine
 	go func() {
 		if err := timeRoutes.Run(":1214"); err != nil {
-			log.Fatalf("Failed to run TimeEntry server: %v", err)
+			log.Fatalf("Failed to start TimeEntry server: %v", err)
 		}
 	}()
 

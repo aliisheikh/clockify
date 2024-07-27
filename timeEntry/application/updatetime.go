@@ -13,7 +13,7 @@ func (t *TimeEntryServiceImpl) Update(timeEntry domain.TimeEntry) error {
 
 	// Validate that StartTime is before EndTime
 	if !timeEntry.StartTime.IsZero() && !timeEntry.EndTime.IsZero() {
-		if timeEntry.StartTime.After(timeEntry.EndTime) {
+		if timeEntry.StartTime.After(*timeEntry.EndTime) {
 			return errors.New("StartTime must be before EndTime")
 		}
 	}

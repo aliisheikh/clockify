@@ -8,6 +8,15 @@ import (
 	"strconv"
 )
 
+// Add Swagger
+// GetUserByID   godoc
+// @Summary   Get User By ID
+// @Description   Get details of a user by their ID
+// @Produce application/json
+// @Param   userID path string true "find Users By ID"
+// @Param   user body domain.User true "UserID"
+// @Success  200{object} domain.User "User fetch Successfully"
+// @Router   /users/{userID} [get]
 func (userController *UserController) GetUserByID(c *gin.Context) {
 
 	userId := c.Param("userID")
@@ -19,7 +28,9 @@ func (userController *UserController) GetUserByID(c *gin.Context) {
 
 	id, err := strconv.Atoi(userId)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error11": "Invalid user ID"})
+		fmt.Println(err)
+		fmt.Println(121212)
 		return
 	}
 

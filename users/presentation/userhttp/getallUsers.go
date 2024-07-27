@@ -5,6 +5,15 @@ import (
 	"net/http"
 )
 
+// GetAllUsers godoc
+// @Summary Get all users
+// @Description Retrieve a list of all users
+// @Tags users
+// @Produce json
+// @Success 200 {object} gin.H "List of users"
+// @Failure 500 {object} gin.H "Internal Server Error"
+// @Failure 404 {object} gin.H "No users found"
+// @Router /api/users [get]
 func (userController *UserController) GetAllUsers(ctx *gin.Context) {
 	// Call the service method to fetch all users
 	users, err := userController.userService.GetAllUsers()
